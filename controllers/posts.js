@@ -116,9 +116,9 @@ const posts = {
 
         try{
             const id = req.url.split('/').pop(); 
+            const result = await Post.findByIdAndDelete(id);
 
-            if(id){
-                const result = await Post.findByIdAndDelete(id);
+            if(result){                
                 await success(req, res); 
             }else{
                 HttpControllers.errorHandle(req, res);
