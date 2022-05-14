@@ -1,12 +1,7 @@
-const responeHandle = require('../service/responeHandle');
+const responeHandle = require('../service/responseHandle');
 
 const http = {
-    successNoData(req, res){
-        res.writeHead(204, headers);
-        res.end();
-    },
     successHandle({req, res, data}){
-        console.log(data);
         responeHandle(res, 200, {
             "status": "success",
             "data": data

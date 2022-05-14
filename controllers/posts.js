@@ -23,7 +23,7 @@ const posts = {
         // 取得貼文 id    
         const id = req.url.split('/').pop();
 
-        if(id !== undefined){
+        if(!id){
             const data = await Post.findOne({ _id: id});
             HttpControllers.successHandle({req, res, data});
         }else{
@@ -51,10 +51,7 @@ const posts = {
             const data = JSON.parse(body);
 
             // 檢查所有必填欄位
-            if(data.name !== undefined
-               && data.tags !== undefined
-               && data.type !== undefined
-               && data.content !== undefined){
+            if(!data.name && !data.tags && !data.type && !data.content){
                 const result = await Post.create
                 (
                     {
@@ -86,8 +83,7 @@ const posts = {
             const id = req.url.split('/').pop();           
             const data = JSON.parse(body);
             
-            if(id !== undefined
-                && (data.content !== undefined || data.tags !== undefined)){
+            if(!id && (!data.content || !data.tags)){
                 const result = await Post.findByIdAndUpdate(
                     id, 
                     {
@@ -112,14 +108,18 @@ const posts = {
     async deletePostsOne(req, res){
         console.log('deletePostsOne');
 
-        const id = req.url.split('/').pop(); 
+        try{
+            const id = req.url.split('/').pop(); 
 
-        if(id !== undefined){
-            const result = await Post.findByIdAndDelete(id);
-            await success(req, res); 
-        }else{
+            if(!id){
+                const result = await Post.findByIdAndDelete(id);
+                await success(req, res); 
+            }else{
+                HttpControllers.errorHandle(req, res);
+            }  
+        }catch(err){
             HttpControllers.errorHandle(req, res);
-        }        
+        }      
     },
     /**
      * 刪除全部貼文

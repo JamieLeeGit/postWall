@@ -17,8 +17,7 @@ const routes = async (req, res) => {
         PostsControllers.readPostsAll(req, res);
     } else if(url.startsWith("/posts/") && method == "GET"){
         // 查詢單筆貼文
-        req.on('end', async () => PostsControllers.
-        readPostsOne(req, res));
+        PostsControllers.readPostsOne(req, res);
     } else if((url == "/posts" || url == "/posts/") && method == "POST"){
         // 新增單筆貼文 
         req.on('end', async () => PostsControllers.

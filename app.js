@@ -7,25 +7,6 @@ const PostsControllers = require('./controllers/posts');
 //DB連線（使用預設檔案 index）
 require('./connections');
 
-/*
-    
-      const testPot = new Post(
-          {
-            name: "jamie",
-            tags:["aa"],
-            type:"person",
-            content:"test",
-            }
-        );
-
-        testPot.save()
-            .then(()=>{
-                console.log("新增資料成功");
-            })
-            .then(error=>{
-                console.log(error);
-            });
-*/
 const routes = require('./routes');
 
 const requestListener = (req,res)=>{
