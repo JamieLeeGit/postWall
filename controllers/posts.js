@@ -23,7 +23,7 @@ const posts = {
         // 取得貼文 id    
         const id = req.url.split('/').pop();
 
-        if(!id){
+        if(id){
             const data = await Post.findOne({ _id: id});
             HttpControllers.successHandle({req, res, data});
         }else{
@@ -83,7 +83,7 @@ const posts = {
             const id = req.url.split('/').pop();           
             const data = JSON.parse(body);
             
-            if(!id && (!data.content || !data.tags)){
+            if(id && (!data.content || !data.tags)){
                 const result = await Post.findByIdAndUpdate(
                     id, 
                     {
@@ -111,7 +111,7 @@ const posts = {
         try{
             const id = req.url.split('/').pop(); 
 
-            if(!id){
+            if(id){
                 const result = await Post.findByIdAndDelete(id);
                 await success(req, res); 
             }else{
