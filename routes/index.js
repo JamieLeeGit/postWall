@@ -26,14 +26,12 @@ const routes = async (req, res) => {
         // 修改單筆貼文 
         req.on('end', async () => PostsControllers.
         updatePostsOne({ req, res, body }));
-    } else if(method == "OPTIONS"){
-        HttpControllers.successNoData(req, res);
-    } else if(url.startsWith("/posts/") && method == "DELETE"){
-        // 刪除單筆貼文 
-        PostsControllers.deletePostsOne(req, res);
     } else if((url == "/posts" || url == "/posts/") && method == "DELETE"){
         // 刪除全部貼文 
         PostsControllers.deletePostsAll(req, res);
+    } else if(url.startsWith("/posts/") && method == "DELETE"){
+        // 刪除單筆貼文 
+        PostsControllers.deletePostsOne(req, res);
     }else{
         HttpControllers.notFound(req, res);
     }
