@@ -51,7 +51,7 @@ const posts = {
             const data = JSON.parse(body);
 
             // 檢查所有必填欄位
-            if(!data.name && !data.tags && !data.type && !data.content){
+            if(data.name && data.tags && data.type && data.content){
                 const result = await Post.create
                 (
                     {
@@ -83,7 +83,7 @@ const posts = {
             const id = req.url.split('/').pop();           
             const data = JSON.parse(body);
             
-            if(id && (!data.content || !data.tags)){
+            if(id && (data.content || data.tags)){
                 const result = await Post.findByIdAndUpdate(
                     id, 
                     {
