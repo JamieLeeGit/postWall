@@ -95,7 +95,7 @@ const posts = {
                         content: data.content,
                         tags: data.tags
                     },
-                    true
+                    { runValidators : true }
                 );
                 
                 await success(req, res);  
