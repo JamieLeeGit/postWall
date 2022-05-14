@@ -78,7 +78,7 @@ const posts = {
         }
     },
     /**
-     * 給 user 修改單一貼文內容用
+     * 給 user 修改單一貼文內容用(content、tags)
      * @param {*} param0 
      */
     async updatePostsOne({ req, res, body }){
@@ -88,7 +88,7 @@ const posts = {
             const id = req.url.split('/').pop();           
             const data = JSON.parse(body);
             
-            if(data.content || data.tags){
+            if(data.content){
                 const result = await Post.findByIdAndUpdate(
                     id, 
                     {
