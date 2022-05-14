@@ -20,13 +20,18 @@ const posts = {
     async readPostsOne(req, res){
         console.log('readPostsOne');
 
-        // 取得貼文 id    
-        const id = req.url.split('/').pop();
+        try{
+            // 取得貼文 id    
+            const id = req.url.split('/').pop();
 
-        if(id){
-            const data = await Post.findOne({ _id: id});
-            HttpControllers.successHandle({req, res, data});
-        }else{
+            if(id){
+                const data = await Post.findOne({ _id: id});
+                HttpControllers.successHandle({req, res, data});
+            }else{
+                HttpControllers.errorHandle(req, res);
+            }
+        }catch(err){
+            console.log(err);
             HttpControllers.errorHandle(req, res);
         }
     },
