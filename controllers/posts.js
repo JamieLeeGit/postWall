@@ -94,7 +94,8 @@ const posts = {
                     {
                         content: data.content,
                         tags: data.tags
-                    }
+                    },
+                    true
                 );
                 
                 await success(req, res);  
